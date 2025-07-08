@@ -25,19 +25,13 @@ export default function App() {
     setError(false);
 
     try {
-      const res = await fetch(
-        `https://api.themoviedb.org/3/search/movie?api_key=${API_KEY}&query=${query}`
-      );
+      const results = await fetchMovies(query);
 
-      if (!res.ok) throw new Error("Failed to fetch");
-
-      const data = await res.json();
-
-      if (data.results.length === 0) {
+      if (results.length === 0) {
         toast.error("No movies found for your request.");
       }
 
-      setMovies(data.results);
+      setMovies(results);
     } catch {
       setError(true);
     } finally {
