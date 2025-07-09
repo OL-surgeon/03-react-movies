@@ -1,6 +1,6 @@
 "use client";
 
-import type { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { Toaster, toast } from "react-hot-toast";
 import { SearchBar } from "../SearchBar/SearchBar";
 import { MovieGrid } from "..//MovieGrid/MovieGrid";
@@ -57,5 +57,3 @@ export default function App() {
     </>
   );
 }
-
-export default App;
