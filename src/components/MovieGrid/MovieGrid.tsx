@@ -1,6 +1,6 @@
 "use client";
 
-import { Movie } from "@/types/movie";
+import { Movie } from "../../types/movie";
 import css from "./MovieGrid.module.css";
 
 type Props = {
