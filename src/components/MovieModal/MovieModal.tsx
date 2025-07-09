@@ -2,7 +2,7 @@
 
 import { useEffect } from "react";
 import { createPortal } from "react-dom";
-import { Movie } from "@/types/movie";
+import { Movie } from "../../types/movie";
 import css from "./MovieModal.module.css";
 
 type Props = {
