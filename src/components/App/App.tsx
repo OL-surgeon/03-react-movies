@@ -3,13 +3,13 @@
 import { useEffect, useState } from "react";
 import { Toaster, toast } from "react-hot-toast";
 import { SearchBar } from "../SearchBar/SearchBar";
-import { MovieGrid } from "..//MovieGrid/MovieGrid";
+import { MovieGrid } from "../MovieGrid/MovieGrid";
 import { Loader } from "../Loader/Loader";
 import { ErrorMessage } from "../ErrorMessage/ErrorMessage";
 import { MovieModal } from "../MovieModal/MovieModal";
-import type { Movie } from "../../types/movie";
+import interface { Movie } from "../../types/movie";
 import "./App.css";
-import { fetchMovies } from "../services/movieService";
+import { fetchMovies } from "../../services/movieService";
 
 const API_KEY = "8eb1c75e4a3c54065cc5bf123fd08d70"; // заміни на свій ключ
 
