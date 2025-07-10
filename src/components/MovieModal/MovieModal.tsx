@@ -1,54 +1,44 @@
-"use client";
-
-import { useEffect } from "react";
 import { createPortal } from "react-dom";
-import { Movie } from "../../types/movie";
+import { useEffect } from "react";
 import css from "./MovieModal.module.css";
+import type { Movie } from "../../types/movie";
 
-type MovieGridProps = {
+interface MovieModalProps {
   movie: Movie;
   onClose: () => void;
-};
+}
 
-export const MovieModal = ({ movie, onClose }: MovieGridProps) => {
+export const MovieModal = ({ movie, onClose }: MovieModalProps) => {
   useEffect(() => {
-    const handleKey = (e: KeyboardEvent) => {
+    const handleEsc = (e: KeyboardEvent) => {
       if (e.key === "Escape") onClose();
     };
 
-    const disableScroll = () => {
-      document.body.style.overflow = "hidden";
-    };
-
-    const enableScroll = () => {
-      document.body.style.overflow = "";
-    };
-
-    window.addEventListener("keydown", handleKey);
-    disableScroll();
+    document.body.style.overflow = "hidden";
+    window.addEventListener("keydown", handleEsc);
 
     return () => {
-      window.removeEventListener("keydown", handleKey);
-      enableScroll();
+      document.body.style.overflow = "";
+      window.removeEventListener("keydown", handleEsc);
     };
   }, [onClose]);
 
-  const handleBackdrop = (e: React.MouseEvent) => {
+  const handleBackdropClick = (e: React.MouseEvent<HTMLDivElement>) => {
     if (e.target === e.currentTarget) onClose();
   };
 
   return createPortal(
     <div
       className={css.backdrop}
-      onClick={handleBackdrop}
       role="dialog"
       aria-modal="true"
+      onClick={handleBackdropClick}
     >
       <div className={css.modal}>
         <button
           className={css.closeButton}
-          aria-label="Close modal"
           onClick={onClose}
+          aria-label="Close modal"
         >
           &times;
         </button>

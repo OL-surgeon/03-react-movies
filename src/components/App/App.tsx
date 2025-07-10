@@ -11,8 +11,6 @@ import type { Movie } from "../../types/movie";
 import "./App.css";
 import { fetchMovies } from "../../services/movieService";
 
-const API_KEY = "8eb1c75e4a3c54065cc5bf123fd08d70"; // заміни на свій ключ
-
 export default function App() {
   const [movies, setMovies] = useState<Movie[]>([]);
   const [loading, setLoading] = useState(false);
@@ -25,7 +23,7 @@ export default function App() {
     setError(false);
 
     try {
-      const results = await fetchMovies(query);
+      const { results } = await fetchMovies(query);
 
       if (results.length === 0) {
         toast.error("No movies found for your request.");
