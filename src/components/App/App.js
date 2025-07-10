@@ -7,11 +7,6 @@ import { MovieGrid } from "../MovieGrid/MovieGrid";
 import { Loader } from "../Loader/Loader";
 import { ErrorMessage } from "../ErrorMessage/ErrorMessage";
 import { MovieModal } from "../MovieModal/MovieModal";
-{
-    Movie;
-}
-from;
-"../../types/movie";
 import "./App.css";
 import { fetchMovies } from "../../services/movieService";
 const API_KEY = "8eb1c75e4a3c54065cc5bf123fd08d70"; // заміни на свій ключ
@@ -38,5 +33,13 @@ export default function App() {
             setLoading(false);
         }
     };
-    return (_jsxs(_Fragment, { children: [_jsx(Toaster, { position: "top-right" }), _jsx(SearchBar, { onSubmit: handleSearch }), loading && _jsx(Loader, {}), error && _jsx(ErrorMessage, {}), !loading && !error && (_jsx(MovieGrid, { movies: movies, onSelect: setSelectedMovie })), selectedMovie && (_jsx(MovieModal, { movie: selectedMovie, onClose: () => setSelectedMovie(null) }))] }));
+    const handleSearchAction = async (formData) => {
+        const query = formData.get("query")?.toString().trim();
+        if (!query) {
+            toast.error("Please enter your search query.");
+            return;
+        }
+        await handleSearch(query);
+    };
+    return (_jsxs(_Fragment, { children: [_jsx(Toaster, { position: "top-right" }), _jsx(SearchBar, { action: handleSearchAction }), loading && _jsx(Loader, {}), error && _jsx(ErrorMessage, {}), !loading && !error && (_jsx(MovieGrid, { movies: movies, onSelect: setSelectedMovie })), selectedMovie && (_jsx(MovieModal, { movie: selectedMovie, onClose: () => setSelectedMovie(null) }))] }));
 }

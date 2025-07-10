@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { Toaster, toast } from "react-hot-toast";
 import { SearchBar } from "../SearchBar/SearchBar";
 import { MovieGrid } from "../MovieGrid/MovieGrid";
@@ -39,10 +39,21 @@ export default function App() {
     }
   };
 
+  const handleSearchAction = async (formData: FormData) => {
+    const query = formData.get("query")?.toString().trim();
+
+    if (!query) {
+      toast.error("Please enter your search query.");
+      return;
+    }
+
+    await handleSearch(query);
+  };
+
   return (
     <>
       <Toaster position="top-right" />
-      <SearchBar onSubmit={handleSearch} />
+      <SearchBar action={handleSearchAction} />
       {loading && <Loader />}
       {error && <ErrorMessage />}
       {!loading && !error && (
